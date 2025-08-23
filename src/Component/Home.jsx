@@ -229,10 +229,10 @@ const Home = () => {
 
     // Panel data
     const panelData = [
-        { id: 1, title: "About", icon: Avatar, href: "/about", color: "bg-blue-500/10", description: "Learn about my background and skills" },
-        { id: 2, title: "Skills", icon: Skills, href: "/skills", color: "bg-orange-400/10", description: "See my professional experience" },
-        { id: 3, title: "Projects", icon: Project, href: "/project", color: "bg-purple-500/10", description: "Explore my portfolio" },
-        { id: 5, title: "Contact", icon: contact, href: "/contact", color: "bg-yellow-400/10", description: "Get in touch with me" },
+        { id: 1, title: "About", icon: Avatar, href: "./about", color: "bg-blue-500/10", description: "Learn about my background and skills" },
+        { id: 2, title: "Skills", icon: Skills, href: "./skills", color: "bg-orange-400/10", description: "See my professional experience" },
+        { id: 3, title: "Projects", icon: Project, href: "./project", color: "bg-purple-500/10", description: "Explore my portfolio" },
+        { id: 4, title: "Contact", icon: contact, href: "./contact", color: "bg-yellow-400/10", description: "Get in touch with me" },
     ];
 
     return (
