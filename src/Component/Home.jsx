@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // Import your images
-import Avatar from "./img/Avtar.PNG";
+import Avatar from "./img/Avatar.WEBP";
 import Skills from "./img/Skills.PNG";
 import Project from "./img/Project.PNG";
 import contact from "./img/contact.PNG";
