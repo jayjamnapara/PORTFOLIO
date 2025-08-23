@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // Import your images
-import Avatar from "./img/Avatar.WEBP";
-import Skills from "./img/Skills.PNG";
-import Project from "./img/Project.PNG";
-import contact from "./img/contact.PNG";
+import Avatar from "./img/Avatar.webp";
+import Skills from "./img/Skills.png";
+import Project from "./img/Project.png";
+import contact from "./img/contact.png";
 
 const Home = () => {
     const [activePanel, setActivePanel] = useState(null);

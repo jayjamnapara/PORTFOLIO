@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import './Contact.css'
 import { FaFacebook } from 'react-icons/fa';
 import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa6';
-import Avatar from './img/Avatar.WEBP';
+import Avatar from './img/Avatar.webp';
 
 const Contact = () => {
   const canvasRef = useRef();

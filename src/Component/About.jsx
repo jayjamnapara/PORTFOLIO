@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import Avatar from './img/Avatar.WEBP';
+import Avatar from './img/Avatar.webp';
 import { FaReact, FaNodeJs, FaDatabase, FaLayerGroup, FaCode } from 'react-icons/fa';
 import { SiJavascript } from 'react-icons/si';
 
