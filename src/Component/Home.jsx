@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 // Import your images
 import Avatar from "./img/Avatar.webp";
 import Skills from "./img/Skills.png";
-import Project from "./img/Project.png";
+import Project from "./img/project.png";
 import contact from "./img/contact.png";
 
 const Home = () => {
