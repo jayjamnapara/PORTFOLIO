@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-
+import { Link, useLocation } from "react-router-dom";
 // Import your images
 import Avatar from "./img/Avatar.webp";
 import Skills from "./img/Skills.png";
@@ -11,6 +11,7 @@ const Home = () => {
     const [activePanel, setActivePanel] = useState(null);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const canvasRef = useRef(null);
+    const location = useLocation();
 
     // Track mouse position for 3D effect
     useEffect(() => {
@@ -44,12 +45,12 @@ const Home = () => {
         const isMobile = window.innerWidth < 768; //tailwind md breakpoint
         const web = {
             nodes: [],
-            connections: [], 
+            connections: [],
             numNodes: isMobile ? 20 : 80,
             autoMoveOffset: { x: 0, y: 0 },
             autoMoveAngle: 0,
             maxDistance: isMobile ? 120 : 180, // mobile small distance
-            nodeRadiusRange: isMobile ? [0.5, 1.2] : [0.8, 2] 
+            nodeRadiusRange: isMobile ? [0.5, 1.2] : [0.8, 2]
         };
 
         // Initialize nodes
@@ -229,10 +230,10 @@ const Home = () => {
 
     // Panel data
     const panelData = [
-        { id: 1, title: "About", icon: Avatar, href: "./about", color: "bg-blue-500/10", description: "Learn about my background and skills" },
-        { id: 2, title: "Skills", icon: Skills, href: "./skills", color: "bg-orange-400/10", description: "See my professional experience" },
-        { id: 3, title: "Projects", icon: Project, href: "./project", color: "bg-purple-500/10", description: "Explore my portfolio" },
-        { id: 4, title: "Contact", icon: contact, href: "./contact", color: "bg-yellow-400/10", description: "Get in touch with me" },
+        { id: 1, title: "About", icon: Avatar, href: "/about", color: "bg-blue-500/10", description: "Learn about my background and skills" },
+        { id: 2, title: "Skills", icon: Skills, href: "/skills", color: "bg-orange-400/10", description: "See my professional experience" },
+        { id: 3, title: "Projects", icon: Project, href: "/project", color: "bg-purple-500/10", description: "Explore my portfolio" },
+        { id: 4, title: "Contact", icon: contact, href: "/contact", color: "bg-yellow-400/10", description: "Get in touch with me" },
     ];
 
     return (
@@ -279,35 +280,38 @@ const Home = () => {
                 {/* Panels */}
                 <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
                     {panelData.map((panel) => (
-                        <motion.a
-                            key={panel.id}
-                            href={panel.href}
-                            className={`p-6 rounded-2xl shadow-lg backdrop-blur-md text-white hover:shadow-2xl transition ${panel.color}`}
-                            onMouseEnter={() => setActivePanel(panel.id)}
-                            onMouseLeave={() => setActivePanel(null)}
-                            whileHover={{ scale: 1.05 }}
-                            animate={{
-                                y: [0, -3, 0],
-                                transition: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: panel.id * 0.2 }
-                            }}
+                        <Link
+                            to={panel.href}
                         >
-                            <div className="flex flex-col items-center text-center">
-                                <motion.img src={panel.icon} alt={panel.title} className="w-16 h-16 mb-4"
-                                    whileHover={{ rotate: 10, scale: 1.1 }}
-                                    animate={{
-                                        rotate: [0, 2, 0],
-                                        transition: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: panel.id * 0.3 }
-                                    }}
-                                />
-                                <h3 className="text-xl font-bold">{panel.title}</h3>
-                                <p className="text-sm text-gray-300 mt-2">{panel.description}</p>
-                            </div>
-                        </motion.a>
+                            <motion.div
+                                key={panel.id}
+                                className={`p-6 rounded-2xl shadow-lg backdrop-blur-md text-white hover:shadow-2xl transition ${panel.color}`}
+                                onMouseEnter={() => setActivePanel(panel.id)}
+                                onMouseLeave={() => setActivePanel(null)}
+                                whileHover={{ scale: 1.05 }}
+                                animate={{
+                                    y: [0, -3, 0],
+                                    transition: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: panel.id * 0.2 }
+                                }}
+                            >
+                                <div className="flex flex-col items-center text-center">
+                                    <motion.img src={panel.icon} alt={panel.title} className="w-16 h-16 mb-4"
+                                        whileHover={{ rotate: 10, scale: 1.1 }}
+                                        animate={{
+                                            rotate: [0, 2, 0],
+                                            transition: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: panel.id * 0.3 }
+                                        }}
+                                    />
+                                    <h3 className="text-xl font-bold">{panel.title}</h3>
+                                    <p className="text-sm text-gray-300 mt-2">{panel.description}</p>
+                                </div>
+                            </motion.div>
+                        </Link>
                     ))}
-                </div>
+                        </div>
             </div>
-        </div>
-    );
+            </div>
+            );
 };
 
-export default Home;
+            export default Home;
