@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Contact.css'
-import { FaGithub, FaInstagram, FaLinkedin, FaCheck } from 'react-icons/fa6';
+import { FaGithub, FaInstagram, FaLinkedin, FaCheck, FaWhatsapp } from 'react-icons/fa6';
 import Avatar from './img/Avatar.webp';
 
 const Contact = () => {
@@ -63,6 +63,10 @@ const Contact = () => {
     {
       link: "https://www.linkedin.com/in/jay-jamnapara-111062322/",
       icon: <FaLinkedin />
+    },
+    {
+      link: "https://wa.me/917861908503",
+      icon: <FaWhatsapp/>
     }
   ]
 
