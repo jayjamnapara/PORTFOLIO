@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import LunaLush from './Project-Image/Luna_Lush.png';
 import carDealer from './Project-Image/Car_Dealer.png';
-import AdminPanel from './Project-Image/Admin_Panel.png';
+import AdminPanel from './Project-Image/Admin_panel.png';
 import TicTacToe from './Project-Image/Tic_Tac_Toe.png';
 
 const Project = () => {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [activeProject, setActiveProject] = useState(null);
 
   // Project categories
   const categories = ["All", "Frontend", "Backend", "Full Stack"];
