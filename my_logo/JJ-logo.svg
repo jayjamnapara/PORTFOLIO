@@ -1,0 +1,6 @@
+<svg width="150" height="150" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="180" height="180" rx="25" ry="25" fill="#222" />
+  <text x="50%" y="55%" text-anchor="middle" font-size="70" font-weight="bold" font-family="Verdana, sans-serif" fill="#00FFAA" dy=".3em">
+    JJ
+  </text>
+</svg>

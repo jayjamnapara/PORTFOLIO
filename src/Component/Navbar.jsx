@@ -15,7 +15,7 @@ const Navbar = () => {
   const navItems = [
     { path: "/", icon: <FaHome />, label: "Home" },
     { path: "/about", icon: <FaExclamationCircle />, label: "About" },
-    { path: "/skills", icon: <GiSkills/>, label: "Skills"},
+    { path: "/skills", icon: <GiSkills />, label: "Skills" },
     { path: "/project", icon: <FaDiagramProject />, label: "Projects" },
     { path: "/contact", icon: <FaPhone />, label: "Contact" },
   ];
@@ -25,11 +25,26 @@ const Navbar = () => {
       <div className="flex flex-row lg:flex-col items-center justify-center gap-3 sm:gap-4 px-3 py-3 rounded-full bg-gradient-to-tl from-[#1e1439] to-blue-950 backdrop-blur-2xl shadow-md w-fit h-fit">
         {/* Logo */}
         <div
-          className="flex px-3 py-1.5 text-white bg-blue-800/60 rounded-full items-center gap-2 font-semibold text-lg cursor-pointer relative"
+          className="flex rounded-full items-center gap-2 font-semibold text-lg cursor-pointer relative"
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <span>JJ</span>
+          <svg width="40" height="40" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="180" height="180" rx="100" ry="100" fill="#8200db" />
+            <text
+              x="50%"
+              y="55%"
+              textAnchor="middle"
+              fontSize="80"
+              fontWeight="bold"
+              fontFamily="Verdana, sans-serif"
+              fill="#fff"
+              dy=".3em"
+            >
+              JJ
+            </text>
+          </svg>
+
           <AnimatePresence>
             {hover && (
               <motion.span
