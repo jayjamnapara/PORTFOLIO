@@ -237,7 +237,7 @@ const Home = () => {
     ];
 
     return (
-        <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden">
+        <div className="relative pb-22 lg:pb-0 min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden">
             {/* Background Canvas */}
             <canvas
                 ref={canvasRef}

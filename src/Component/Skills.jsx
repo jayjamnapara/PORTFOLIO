@@ -189,7 +189,7 @@ const Skills = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden relative py-12">
+    <div className="min-h-screen pb-20 lg:pb-10 bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white overflow-hidden relative py-12">
       {/* Canvas background */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-20 z-0"></canvas>
       

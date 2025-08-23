@@ -125,7 +125,7 @@ const Project = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white py-16 px-4 md:px-8">
+    <div className="min-h-screen pb-20 lg:pb-10 bg-[#0a0a0a] text-white py-16 px-4 md:px-8">
       {/* Animated background elements */}
       <motion.div
         className="absolute top-20 left-10 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
@@ -289,86 +289,6 @@ const Project = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* Project Modal
-      {activeProject && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4"
-          onClick={() => setActiveProject(null)}
-        >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", damping: 25 }}
-            className="bg-gradient-to-br from-[#0a0a0a] to-[#1a1a2e] border border-white/10 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative h-64 md:h-80">
-              <img
-                src={activeProject.image}
-                alt={activeProject.title}
-                className="w-full h-full object-cover"
-              />
-              <button
-                className="absolute top-4 right-4 bg-black/70 w-8 h-8 rounded-full flex items-center justify-center hover:bg-black"
-                onClick={() => setActiveProject(null)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-              <div className="absolute bottom-4 left-4 bg-black/70 px-3 py-1 rounded-full text-sm">
-                {activeProject.category}
-              </div>
-            </div>
-
-            <div className="p-6">
-              <h2 className="text-3xl font-bold mb-4">{activeProject.title}</h2>
-              <p className="text-gray-300 mb-6">{activeProject.description}</p>
-
-              <h3 className="text-xl font-semibold mb-3">Technologies Used</h3>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {activeProject.technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="bg-white/10 px-3 py-1 rounded-full text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex gap-4">
-                <motion.a
-                  href={activeProject.liveLink}
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg font-medium"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  Live Demo
-                </motion.a>
-                <motion.a
-                  href={activeProject.githubLink}
-                  className="flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-lg font-medium hover:bg-white/20 transition"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                  View Code
-                </motion.a>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )} */}
     </div>
   );
 };
