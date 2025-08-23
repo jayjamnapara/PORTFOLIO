@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed z-50 lg:top-1/4 lg:left-15 md:bottom-1 bottom-4 left-1/2 -translate-x-1/2 flex justify-center px-2 w-fit h-fit">
-      <div className="flex flex-row lg:flex-col items-center justify-center gap-3 sm:gap-4 px-3 py-3 rounded-full bg-gradient-to-tl from-[#1e1439] via-gray-950 to-blue-950 backdrop-blur-2xl shadow-md w-fit h-fit">
+      <div className="flex flex-row lg:flex-col items-center justify-center gap-3 sm:gap-4 px-3 py-3 rounded-full bg-gradient-to-tl from-[#1e1439] to-blue-950 backdrop-blur-2xl shadow-md w-fit h-fit">
         {/* Logo */}
         <div
           className="flex px-3 py-1.5 text-white bg-blue-800/60 rounded-full items-center gap-2 font-semibold text-lg cursor-pointer relative"
