@@ -1,84 +1,70 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Contact.css'
-import { FaFacebook } from 'react-icons/fa';
-import { FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { FaGithub, FaInstagram, FaLinkedin, FaCheck } from 'react-icons/fa6';
 import Avatar from './img/Avatar.webp';
 
 const Contact = () => {
   const canvasRef = useRef();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    
-    // Set canvas size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    // Particle system
-    const particles = [];
-    const particleCount = 200;
-    
-    // Create particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 2 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        color: `rgba(${Math.random() * 70 + 150}, ${Math.random() * 70 + 150}, ${Math.random() * 70 + 200}, ${Math.random() * 0.5 + 0.2})`
-      });
-    }
-    
-    // Draw particles
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach(particle => {
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color;
-        ctx.fill();
-        
-        // Update position
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-        
-        // Bounce off edges
-        if (particle.x <= 0 || particle.x >= canvas.width) particle.speedX *= -1;
-        if (particle.y <= 0 || particle.y >= canvas.height) particle.speedY *= -1;
-      });
-      
-      requestAnimationFrame(draw);
-    };
-    
-    draw();
-    
-    // Handle resize
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    
-    window.addEventListener('resize', handleResize);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      e.target.reset();
-      setIsSubmitted(false);
-    }, 3000);
-  };
+    setStatus("sending...");
+    setShowSuccess(false);
+
+    // backend url (https://backend-portfolio-qidj.onrender.com/)
+
+    try {
+      const res = await fetch("https://backend-portfolio-qidj.onrender.com/", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(formData)
+      })
+
+      let Data = await res.json();
+      if (Data.success) {
+        setStatus("");
+        setShowSuccess(true);
+        setFormData({ name: "", email: "", message: "" });
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 5000);
+      }
+      else {
+        setStatus("Failed to send message. Please try again.");
+      }
+    }
+    catch (err) {
+      console.error("sent mail error:", err);
+      setStatus("Connection error. Please try again later.");
+    }
+  }
+
+  // Rest of your existing code for canvas animation...
+
+  let social = [
+    {
+      link: "https://www.instagram.com/___jay_2705?igsh=NTB6cXExdXk1Zzlx",
+      icon: <FaInstagram />
+    },
+    {
+      link: "https://github.com/jayjamnapara/",
+      icon: <FaGithub />
+    },
+    {
+      link: "https://www.linkedin.com/in/jay-jamnapara-111062322/",
+      icon: <FaLinkedin />
+    }
+  ]
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 overflow-hidden">
@@ -91,7 +77,7 @@ const Contact = () => {
           transition: 'opacity 0.5s ease'
         }}
       />
-      
+
       {/* Floating Shapes */}
       <motion.div className="absolute top-20 left-10 w-40 h-40 bg-purple-500/30 rounded-full blur-3xl"
         animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
@@ -102,9 +88,102 @@ const Contact = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
 
+      {/* Success Message Modal */}
+      <AnimatePresence>
+        {showSuccess && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/70" onClick={() => setShowSuccess(false)}></div>
+            <motion.div
+              className="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 max-w-md w-full border border-purple-500/30 shadow-2xl"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 15 }}
+            >
+              <div className="text-center">
+                <motion.div
+                  className="mx-auto mb-6 w-20 h-20 rounded-full bg-green-900/20 flex items-center justify-center"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
+                  >
+                    <FaCheck className="text-5xl text-green-500" />
+                  </motion.div>
+                </motion.div>
+                
+                <motion.h3 
+                  className="text-2xl font-bold text-white mb-4"
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Message Sent!
+                </motion.h3>
+                
+                <motion.p 
+                  className="text-gray-300 mb-6"
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  Thank you for reaching out. I'll get back to you as soon as possible.
+                </motion.p>
+                
+                <motion.button
+                  className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowSuccess(false)}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  Continue
+                </motion.button>
+              </div>
+              
+              {/* Animated confetti effect */}
+              {[...Array(15)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full"
+                  style={{
+                    background: [`#ff7373`, `#73b0ff`, `#ffdf73`, `#73ff8c`][i % 4],
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                  }}
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ 
+                    y: [0, -40, 0],
+                    opacity: [0, 1, 0],
+                    x: Math.random() > 0.5 ? [0, 20, 0] : [0, -20, 0]
+                  }}
+                  transition={{ 
+                    duration: 1.5, 
+                    delay: i * 0.1,
+                    repeat: Infinity,
+                    repeatDelay: 2
+                  }}
+                />
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-4xl mx-4 my-8">
-        <motion.h1 
+        <motion.h1
           className="text-5xl font-light text-center mb-12 text-white"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,8 +191,8 @@ const Contact = () => {
         >
           Get in Touch
         </motion.h1>
-        
-        <motion.div 
+
+        <motion.div
           className="flex flex-col md:flex-row bg-black/30 backdrop-blur-md rounded-2xl overflow-hidden border border-gray-800 shadow-2xl"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -124,45 +203,68 @@ const Contact = () => {
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">Your Name</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  className="w-full px-4 py-3 rounded-lg input-field text-white" 
+                <input
+                  type="text"
+                  id="name"
+                  name='name'
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg input-field text-white"
                   placeholder="John Doe"
                   required
                 />
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">Email Address</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  className="w-full px-4 py-3 rounded-lg input-field text-white" 
+                <input
+                  type="email"
+                  id="email"
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg input-field text-white"
                   placeholder="john@example.com"
                   required
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">Your Message</label>
-                <textarea 
-                  id="message" 
-                  rows="4" 
-                  className="w-full px-4 py-3 rounded-lg input-field text-white" 
+                <textarea
+                  id="message"
+                  rows="4"
+                  name='message'
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg input-field text-white"
                   placeholder="Hello, I would like to..."
                   required
                 ></textarea>
               </div>
-              <motion.button 
-                type="submit" 
+              <motion.button
+                type="submit"
                 className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                {isSubmitted ? 'Message Sent!' : 'Send Message'}
+                Send Message
               </motion.button>
+
+              {status && (
+                <motion.p
+                  className={`text-center text-xl font-semibold ${
+                    status.includes("Failed") || status.includes("error") 
+                      ? "text-red-400" 
+                      : "text-white"
+                  }`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {status}
+                </motion.p>
+              )}
             </form>
           </div>
-          
+
           {/* Contact Info & Avatar */}
           <div className="w-full md:w-1/2 bg-gradient-to-br from-gray-900 to-black p-8 flex flex-col justify-center">
             <div className="text-center mb-8">
@@ -176,7 +278,7 @@ const Contact = () => {
               <h2 className="text-2xl font-semibold text-white">Jay Jamnapara</h2>
               <p className="text-gray-400">Full Stack Developer</p>
             </div>
-            
+
             <div className="space-y-4">
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-indigo-900/50 flex items-center justify-center mr-3">
@@ -204,12 +306,12 @@ const Contact = () => {
                 <span className="text-gray-300">Ahmedabad, India</span>
               </div>
             </div>
-            
+
             <div className="flex justify-center space-x-4 mt-8">
-              {[ <FaFacebook />, <FaTwitter/>, <FaInstagram/>, <FaGithub/>].map((social, index) => (
-                <motion.a 
+              {social.map((social, index) => (
+                <motion.a
                   key={index}
-                  href="#" 
+                  href={social.link}
                   className="social-icon w-12 h-12 rounded-full flex items-center justify-center bg-gray-800 hover:bg-indigo-900/50 transition-colors duration-300"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
@@ -218,7 +320,7 @@ const Contact = () => {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <svg className="w-5 h-5 text-2xl text-gray-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    {social}
+                    {social.icon}
                   </svg>
                 </motion.a>
               ))}
