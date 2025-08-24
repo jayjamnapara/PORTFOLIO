@@ -46,10 +46,10 @@ const Home = () => {
         const web = {
             nodes: [],
             connections: [],
-            numNodes: isMobile ? 20 : 80,
+            numNodes: isMobile ? 30 : 90,
             autoMoveOffset: { x: 0, y: 0 },
             autoMoveAngle: 0,
-            maxDistance: isMobile ? 120 : 180, // mobile small distance
+            maxDistance: isMobile ? 100 : 180, // mobile small distance
             nodeRadiusRange: isMobile ? [0.5, 1.2] : [0.8, 2]
         };
 
@@ -66,7 +66,7 @@ const Home = () => {
                 baseY: 0,
                 autoMoveX: 0,
                 autoMoveY: 0,
-                autoMoveSpeed: 0.8 + Math.random() * 0.8,
+                autoMoveSpeed: 0.9 + Math.random() * 0.9,
                 autoMoveRadius: isMobile ? 15 + Math.random() * 40 : 20 + Math.random() * 60, //small orbit
                 autoMoveAngle: Math.random() * Math.PI * 2,
             });

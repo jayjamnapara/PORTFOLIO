@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Avatar from './img/Avatar.webp';
-import { FaReact, FaNodeJs, FaDatabase, FaLayerGroup, FaCode } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaDatabase, FaLayerGroup } from 'react-icons/fa';
 import { SiJavascript } from 'react-icons/si';
-
+import { Link, useLocation } from 'react-router-dom'
 const About = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const canvasRef = useRef();
     const [isHovered, setIsHovered] = useState(false);
     const particlesRef = useRef(null);
+    const location = useLocation();
 
     // Floating particles effect
     useEffect(() => {
@@ -409,23 +410,25 @@ const About = () => {
                                     }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    {/* Button shine effect */}
-                                    <motion.div
-                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                                        initial={{ x: "-100%" }}
-                                        whileHover={{ x: "100%" }}
-                                        transition={{ duration: 0.6 }}
-                                    />
+                                    <Link className="flex justify-center items-center gap-2" to="/contact">
+                                        {/* Button shine effect */}
+                                        <motion.div
+                                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                                            initial={{ x: "-100%" }}
+                                            whileHover={{ x: "100%" }}
+                                            transition={{ duration: 0.6 }}
+                                        />
 
-                                    <span>Get In Touch</span>
-                                    <svg
-                                        className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
+                                        <span>Get In Touch</span>
+                                        <svg
+                                            className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </Link>
                                 </motion.button>
                             </motion.div>
                         </motion.div>
