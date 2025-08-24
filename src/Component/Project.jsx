@@ -40,7 +40,6 @@ const Project = () => {
       description: "A secure authentication service with PassportAuth, and password recovery with mailer funcationality and JWT token through decryption.",
       technologies: ["Node.js", "MongoDB", "PassportAuth", "JWT", "Mailer"],
       image: AdminPanel,
-      liveLink: "#",
       githubLink: "https://github.com/jayjamnapara/Admin-Panel"
     },
     {
@@ -50,8 +49,7 @@ const Project = () => {
       description: "A scalable REST API with authentication, rate limiting, and comprehensive documentation.",
       technologies: ["Node.js", "Express", "JWT", "MongoDB"],
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      liveLink: "#",
-      githubLink: "#"
+      githubLink: "https://github.com/jayjamnapara/RESTApi.git"
     },
     {
       id: 6,
@@ -70,7 +68,6 @@ const Project = () => {
       description: "A secure authentication service with OAuth, two-factor authentication, and password recovery.",
       technologies: ["Node.js", "Redis", "OAuth2", "JWT"],
       image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
-      liveLink: "#",
       githubLink: "#"
     },
     {
@@ -80,8 +77,8 @@ const Project = () => {
       description: "",
       technologies: ["React", "TailwindCSS", "JavaScript"],
       image: TicTacToe,
-      liveLink: "#",
-      githubLink: "#"
+      liveLink: "https://tic-tac-toe-jay.netlify.app/",
+      githubLink: "https://github.com/jayjamnapara/Tic-Tac-toe"
     },
   ];
 
@@ -227,7 +224,7 @@ const Project = () => {
           animate="visible"
         >
           {filteredProjects.map((project) => (
-            <motion.div 
+            <motion.div
               key={project.id}
               variants={itemVariants}
               whileHover="hover"
@@ -261,17 +258,30 @@ const Project = () => {
                 </div>
 
                 <div className="flex justify-between items-center">
-                  <motion.a
-                    href={project.liveLink}
-                    className="text-sm text-purple-400 hover:text-purple-300 flex items-center gap-1"
-                    whileHover={{ x: 5 }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    Live Demo
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </motion.a>
+                  {project.liveLink && (
+                    <a
+                      href={project.liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-blue-500 hover:underline"
+                    >
+                      Live Demo
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </a>
+                  )}
                   <motion.a
                     href={project.githubLink}
                     className="text-sm text-gray-400 hover:text-white flex items-center gap-1"
